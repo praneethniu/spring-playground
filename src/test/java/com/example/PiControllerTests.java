@@ -20,7 +20,7 @@ public class PiControllerTests {
     private MockMvc mvc;
 
     @Test
-    public void testIndexEndpoint() throws Exception {
+    public void pi_returnsPI() throws Exception {
         this.mvc.perform(get("/math/pi").accept(MediaType.TEXT_PLAIN))
                 .andExpect(status().isOk())
                 .andExpect(content().string("3.141592653589793"));
