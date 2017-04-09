@@ -9,12 +9,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(PiController.class)
-public class PiControllerTests {
+@WebMvcTest(MathController.class)
+public class MathControllerTests {
 
     @Autowired
     private MockMvc mvc;
@@ -26,4 +27,10 @@ public class PiControllerTests {
                 .andExpect(content().string("3.141592653589793"));
     }
 
+    @Test
+    public void volume_returnsVolume() throws Exception {
+        this.mvc.perform(get("/math/volume/3/3/3").accept(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string("The volume of a 3x3x3 rectangle is 27"));
+    }
 }
